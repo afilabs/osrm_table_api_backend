@@ -17,9 +17,8 @@ app.get("/search-places", async (req, res) => {
   }
 
   try {
-    const placesRes = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=${placeType}&key=${GOOGLE_API_KEY}`
-    );
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=${placeType}&key=${GOOGLE_API_KEY}`;
+    const placesRes = await axios.get(apiUrl);
     res.status(200).json(placesRes.data?.results);
   } catch (err) {
     res.status(500).send("System error!");
